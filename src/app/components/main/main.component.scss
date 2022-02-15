@@ -1,0 +1,222 @@
+@import '../../shared/styles/bace';
+@import '../../shared/styles/variables';
+@import '../../shared/styles/mixins';
+
+.container{
+    width: 100%;
+
+    .header-container{
+        @include name ( 100%, 50px );
+        background-color: rgba(12, 8, 43, 0.808);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 10px 0 10px;
+
+        .header-text{
+            font-size: 20px;
+            font-family: sans-serif;
+            color: white;
+            letter-spacing: 3px;
+        }
+
+        .header-btn{
+
+            .btn-in{
+                @include name ( 80px, 40px );
+                border: 1px solid $btn-colorIn;   
+                background-color: rgba(12, 8, 43, 0.808);
+                color: $btn-colorIn; 
+                border-radius: 2px;
+            }
+            .btn-in:hover{
+                background-color: $btn-colorIn;
+                color: white;
+            }
+            .btn-up{
+                @include name ( 80px, 40px );
+                border: 1px solid $btn-colorUp;
+                background-color: rgba(12, 8, 43, 0.808); 
+                color: $btn-colorUp; 
+                border-radius: 2px;     
+            }
+            .btn-up:hover{
+                background-color: $btn-colorUp;
+                color: white;
+            }
+            .btn-nameUser{
+                @include name ( 80px, 40px );
+                border: 1px solid $btn-colorUser;
+                background-color: $btn-colorUser; 
+                border-radius: 2px; 
+            }
+        }
+    }
+}
+.table-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+
+    .table-blog{
+        @include name ( 70%, 120px );
+        border: 2px solid $main-color;
+        border-radius: 3px;
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .first-blog{
+        line-height: 25px;
+
+        .blog1{
+            font-size: 18px;
+            font-family: sans-serif;
+            font-weight: bold;
+        }
+    
+        .blog2, .blog3{
+            font-size: 15px;
+            font-family: sans-serif;
+            color: rgb(109, 105, 105); 
+        }
+    }
+
+    .blog-time{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .clock{
+            @include name ( 15px, 15px );
+            background-size: 15px;
+            background-image: url(../../../assets/icon/Paomedia-Small-N-Flat-Clock.svg);
+            background-repeat: no-repeat;
+            margin-right: 3px;
+            color: rgb(109, 105, 105); 
+            font-size: 15px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .btn-edit{
+            @include name ( 48px, 30px );
+            background-color: $btn-colorEdite;
+            border: 1px solid $btn-colorEdite;
+            border-radius: 5px;
+            color: white;
+            font-size: 12px;
+            cursor: pointer; 
+            margin-left: 6px;          
+        }
+        .btn-edit:hover{
+            background-color: rgba(252, 164, 2, 0.911);
+            color: white;
+        }
+        .btn-delete{
+            @include name ( 60px, 30px );
+            background-color: $btn-colorDelite;
+            border: 1px solid $btn-colorDelite;
+            border-radius: 5px;
+            color: white;
+            font-size: 12px;
+            cursor: pointer;
+            margin-left: 6px;           
+        }
+        .btn-delete:hover{
+            background-color: rgb(197, 19, 54);
+            color: white;
+        }
+    }
+   
+}
+.modal-wrapper{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.603);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .wrapper-container{
+        width: 350px;
+        min-height: 300px;
+        border-radius: 4px;
+        box-shadow: 0 1px 2px rgba(189, 186, 186, 0.712);
+        background-color: white;
+        font-family: sans-serif;
+        font-weight: normal;
+        font-size: 15px;
+        padding: 25px;
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 31px;
+
+        .addSignIn{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 18px;
+        }
+
+        .closeModal{
+            cursor: pointer;
+        }
+        .inputField{
+            @include name ( 300px, 30px );
+            font-size: 12px;
+            outline: none;
+            border-radius: 3px;
+            padding: 5px;
+            color: rgb(122, 120, 120);
+            border: 1px solid gainsboro;
+        }
+        .box{
+            margin-top: 8px;
+        }
+        .modal-status, .modal-warning{
+            font-size: 15px;
+            font-family: 'Times New Roman', Times, serif;
+            color: red;
+        }
+        .btnSave{
+            @include name ( 70px, 30px );
+            background-color: $btn-colorIn;
+            border: 0 solid hsl(81, 148, 107);
+            border-radius: 5px;
+            color: white;
+            font-size: 12px;
+            cursor: pointer;
+        
+            &:hover {
+                background-color: hsl(160, 40%, 50%);
+            }
+            
+            &:focus {
+                outline: 2px solid hsl(160, 20%, 50%);
+            }
+
+            &:disabled {
+                background: gray;
+            }
+        }
+
+        .description {
+            @include name ( 300px, 90px );
+            font-size: 12px;
+            outline: none;
+            border-radius: 3px;
+            padding: 5px;
+            color: rgb(122, 120, 120);
+            border: 1px solid gainsboro;
+            resize: none;
+            outline: none;
+          }
+    }
+}

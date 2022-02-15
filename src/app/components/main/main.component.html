@@ -1,0 +1,129 @@
+<header>
+    <div class="container" *ngIf="logIn">
+        <div class="header-container">
+            <div class="header-text">Angular blog</div>
+            <div class="header-btn">
+                <button class="btn-in" (click)="openSignIn()">Sign In</button>
+                <button class="btn-up" (click)="openSignUp()">Sign Up</button>
+            </div>
+        </div>
+    </div>
+    <div class="container" *ngIf="!logIn">
+        <div class="header-container">
+            <div class="header-text">Angular blog</div>
+            <div class="header-btn">
+                <button class="btn-in" (click)="showAddBlog()">Add post</button>
+                <button class="btn-nameUser">{{ checkUser }}</button>
+                <button class="btn-up" (click)="signOut()">Sign Out</button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="table-container" *ngFor="let item of byPosts; index as i">
+    <div class="table-blog">
+        <div class="first-blog">
+            <div class="blog1">{{ item.topic | titlecase }}</div>
+            <div class="blog2">Posted by: {{ item.postedBy | titlecase }}</div>
+            <div class="blog3">{{ item.message |titlecase }}</div>
+        </div>
+        <div class="second-blog">
+            <div class="blog-time">
+                <div class="clock"></div>
+                {{ item.date | date:'HH:mm, dd.MM.YYYY' }}
+                <div class="blogButtons" *ngIf="checkUser == item.postedBy || checkUser == 'Admin'">
+                    <button type="button" class="btn-edit" (click)="showEditBlog(item, i)">Edit</button>
+                    <button type="button" class="btn-delete" (click)="deleteBlog(item)">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-container>
+    <div class="modal-wrapper" *ngIf="showModalIn">
+        <div class="wrapper-container">
+            <div class="addSignIn">
+                <div>Sign In</div>
+                <div class="closeModal" (click)="closeModalIn()">X</div>
+            </div>
+            <hr>
+            <div class="box">
+                <span>Email:</span>
+                <input class="inputField" type="email"
+                 name="userEmail" [(ngModel)]="userEmail"
+                 placeholder="Write your email...">
+            </div>
+            <div class="box">
+                <span>Password:</span>
+                <input class="inputField" type="password" 
+                name="userPassword" [(ngModel)]="userPassword"
+                placeholder="Write your password...">
+            </div>
+            <p *ngIf="statusValid" class="modal-status">Введено невірний email або пароль!</p>
+            <div class="box">
+                <input class="btnSave" type="button" value="Submit" (click)="signInUser()">
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-wrapper" *ngIf="showModalUp">
+        <div class="wrapper-container">
+            <div class="addSignIn">
+                <div>Sign Up</div>
+                <div class="closeModal" (click)="closeModalUp()">X</div>
+            </div>
+            <hr>
+            <div class="box">
+                <span>Username:</span>
+                <input class="inputField" type="text" name="newUserName"
+                 [(ngModel)]="newUserName"
+                  placeholder="Write your name..."
+                  (input)="checkName()" [style.border-color]="statusWarningOne ? 'crimson' : 'gainsboro'">
+            </div>
+            <p *ngIf="statusWarningOne" class="modal-warning">{{ modalName }}</p>
+            <div class="box">
+                <span>Email:</span>
+                <input class="inputField" type="email" name="newUserEmail"
+                [(ngModel)]="newUserEmail" 
+                placeholder="Write your email..."
+                (input)="checkEmail()" [style.border-color]="statusWarningTwo ? 'crimson' : 'gainsboro'">
+            </div>
+            <p *ngIf="statusWarningTwo" class="modal-warning">{{ modalEmail }}</p>
+            <div class="box">
+                <span>Password:</span>
+                <input class="inputField" type="password" name="newUserPassword"
+                [(ngModel)]="newUserPassword"
+                placeholder="Write your password..."
+                (input)="checkPass()" [style.border-color]="statusWarningThree ? 'crimson' : 'gainsboro'">
+            </div>
+            <p *ngIf="statusWarningThree" class="modal-warning">{{ modalPassword }}</p>
+            <div class="box">
+                <input class="btnSave" type="button" value="Submit" [disabled]="btnDisabled" (click)="addUser()">
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-wrapper" *ngIf="showModalAddPost">
+        <div class="wrapper-container">
+            <div class="addSignIn">
+                <div *ngIf="addEdited">Add Post</div>
+                <div *ngIf="!addEdited">Edit Post</div>
+                <div class="closeModal" (click)="closeModalAdd()">X</div>
+            </div>
+            <hr>
+            <div class="box">
+                <span>Title:</span>
+                <input class="inputField" (input)="checkTitle()" placeholder="Write your Title..." [(ngModel)]="title">
+            </div>
+            <div>
+                <span>Text:</span>
+                <textarea class="description" (input)="checkDescription()" [(ngModel)]="description"></textarea>
+            </div>
+            <div class="box">
+                <input *ngIf="addEdited" [disabled]="btnDisabled" class="btnSave" type="button" value="Post" (click)="addBlog()">
+                <input *ngIf="!addEdited" class="btnSave" type="button" value="Edit" (click)="editBlog()">
+            </div>
+        </div>
+    </div>
+</ng-container>
